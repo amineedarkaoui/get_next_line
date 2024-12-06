@@ -6,7 +6,7 @@
 /*   By: aedarkao <aedarkao@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/15 20:21:55 by aedarkao          #+#    #+#             */
-/*   Updated: 2024/11/30 15:41:37 by aedarkao         ###   ########.fr       */
+/*   Updated: 2024/12/06 15:03:22 by aedarkao         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,11 @@ static void	read_buf(int fd, char **buf, int *read_bytes)
 	old_cont = *buf;
 	new_cont = (char *) malloc(BUFFER_SIZE + 1);
 	*read_bytes = read(fd, new_cont, BUFFER_SIZE);
-	new_cont[*read_bytes] = 0;
-	if (*read_bytes || ft_strlen(old_cont))
+	if (*read_bytes > 0)
+	{
+		new_cont[*read_bytes] = 0;
 		*buf = ft_strjoin(old_cont, new_cont);
-	else
-		*buf = NULL;
+	}
 	free(new_cont);
 	free(old_cont);
 }
@@ -104,7 +104,7 @@ char	*get_next_line(int fd)
 // 	// printf("%s", str);
 // 	// free(str);
 // 	char *str;
-// 	for (int i = 0; i < 15; i++)
+// 	for (int i = 0; i < 5; i++)
 // 	{
 // 		str = get_next_line(fd);
 // 		printf("%s", str);
