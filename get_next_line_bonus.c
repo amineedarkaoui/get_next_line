@@ -17,12 +17,16 @@ static void	read_buf(int fd, char **buf, int *read_bytes)
 	char	*new_cont;
 	char	*old_cont;
 
-	old_cont = *buf;
+	if (*buf)
+		old_cont = ft_strdup(*buf);
+	else
+		old_cont = ft_strdup("");
 	new_cont = (char *) malloc(BUFFER_SIZE + 1);
 	*read_bytes = read(fd, new_cont, BUFFER_SIZE);
 	if (*read_bytes > 0)
 	{
 		new_cont[*read_bytes] = 0;
+		free(*buf);
 		*buf = ft_strjoin(old_cont, new_cont);
 	}
 	free(new_cont);
